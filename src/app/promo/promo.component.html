@@ -1,0 +1,19 @@
+<div
+  class="promo"
+  [class.promo_expired]="remainingSeconds <= 0"
+>
+  <div class="promo__header">
+    <h2 class="promo__title">{{ promo.name }}</h2>
+    <a routerLink="/edit/{{promo.id}}" class="promo__link-edit"><fa name="pencil"></fa></a>
+  </div>
+  <div class="promo__datetime">
+    <div
+      *hideItBootstrap="['xs']"
+      [innerHTML]="remainingSeconds | remainingTime:'inline'"
+    ></div>
+    <div
+      *showItBootstrap="['xs']"
+      [innerHTML]="remainingSeconds | remainingTime:'multiline'"
+    ></div>
+  </div>
+</div>

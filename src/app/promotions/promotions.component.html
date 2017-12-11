@@ -1,0 +1,13 @@
+<div class="promotions">
+  <div class="promotions__header">
+    <h1 class="promotions__title">Promotions</h1>
+    <a class="promotions__link-create" routerLink="/create"><fa name="plus"></fa></a>
+  </div>
+  <div class="promotions__list">
+    <app-promo
+      *ngFor="let promo of promotions$ | async; trackBy: trackByFn"
+      class="promotions__promo"
+      [promo]="promo"
+    ></app-promo>
+  </div>
+</div>

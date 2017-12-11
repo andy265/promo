@@ -1,0 +1,137 @@
+<div class="promo-editor">
+  <a routerLink="/promotions"><fa name="long-arrow-left"></fa>Back to promotions</a>
+  <div [ngSwitch]="state">
+    <h1
+      *ngSwitchCase="states.Create"
+      class="promo-editor__title"
+    >Create new promotion</h1>
+    <h1
+      *ngSwitchCase="states.Edit"
+      class="promo-editor__title"
+    >Edit promotion</h1>
+  </div>
+  <form #promoForm="ngForm">
+    <div *ngIf="promo">
+      <div class="promo-editor__row">
+        <span class="promo-editor__row-item-title">name</span>
+        <div class="promo-editor__row-item-input">
+          <input
+            [(ngModel)]="promo.name"
+            class="promo-editor__input-name"
+            #name="ngModel"
+            required
+            maxlength="255"
+            name="name"
+          >
+        </div>
+      </div>
+      <div
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+        class="promo-editor__text-error"
+      >
+        <div *ngIf="name.errors.required">
+          Name is required.
+        </div>
+        <div *ngIf="name.errors.maxlength">
+          Name can not be longer than 255 characters.
+        </div>
+      </div>
+      <div class="promo-editor__row">
+        <span class="promo-editor__row-item-title">start date and time</span>
+        <div class="promo-editor__row-item-input">
+          <input
+            [ngModel]="startDate"
+            (ngModelChange)="onStartDateChange($event)"
+            #start="ngModel"
+            mwlFlatpickr
+            [appCompareWithDate]="{ isLessThen: end.value }"
+            [enable]="[enabledDates]"
+            [convertModelValue]="true"
+            [enableTime]="true"
+            [time24hr]="true"
+            [inline]="true"
+            [hidden]="true"
+            dateFormat="Y-m-d H:i"
+            name="start"
+          >
+        </div>
+      </div>
+      <div
+        *ngIf="start.invalid && start.errors.compareWithDate"
+        class="promo-editor__text-error"
+      >
+        Start date and time must be less then end date and time.
+      </div>
+      <div class="promo-editor__row">
+        <span class="promo-editor__row-item-title">End date and time</span>
+        <div class="promo-editor__row-item-input">
+          <input
+            [ngModel]="endDate"
+            (ngModelChange)="onEndDateChange($event)"
+            #end="ngModel"
+            mwlFlatpickr
+            [appCompareWithDate]="{ isMoreThen: start.value }"
+            [enable]="[enabledDates]"
+            [convertModelValue]="true"
+            [enableTime]="true"
+            [time24hr]="true"
+            [inline]="true"
+            [hidden]="true"
+            dateFormat="Y-m-d H:i"
+            name="end"
+          >
+        </div>
+      </div>
+      <div
+        *ngIf="end.invalid && end.errors.compareWithDate"
+        class="promo-editor__text-error"
+      >
+        End date and time must be more then start date and time.
+      </div>
+    </div>
+  </form>
+  <div class="promo-editor__information-about-time">
+    <div *ngIf="remainingSecondsToStart <= 0">
+      Promotion is already on.
+    </div>
+    <div *ngIf="remainingSecondsToStart > 0">
+      Promotion will begin in <span [innerHTML]="remainingSecondsToStart | remainingTime:'inline'"></span>.
+    </div>
+    <div *ngIf="remainingSecondsToEnd <= 0">
+      Promotion is already over.
+    </div>
+    <div *ngIf="remainingSecondsToEnd > 0">
+      Promotion will expire in <span [innerHTML]="remainingSecondsToEnd | remainingTime:'inline'"></span>.
+    </div>
+  </div>
+  <div
+    [ngSwitch]="state"
+    class="promo-editor__buttons"
+  >
+    <div *ngSwitchCase="states.Create">
+      <button
+        class="promo-editor__button"
+        [disabled]="!promo"
+        (click)="promoForm.form.valid ? onCreate() : markFormControlsAsTouched(promoForm.form)"
+      >create<fa class="promo-editor__button-icon" name="spinner" animation="spin" [hidden]="!isCreating"></fa></button>
+    </div>
+    <div *ngSwitchCase="states.Edit">
+      <button
+        class="promo-editor__button"
+        [disabled]="!promo || !isPromoChanged"
+        (click)="promoForm.form.valid ? onSave() : markFormControlsAsTouched(promoForm.form)"
+      >save<fa class="promo-editor__button-icon" name="spinner" animation="spin" [hidden]="!isSaving"></fa></button>
+      <button
+        class="promo-editor__button promo-editor__button_theme_delete"
+        [disabled]="!promo"
+        (click)="onDelete()"
+      >delete<fa class="promo-editor__button-icon" name="spinner" animation="spin" [hidden]="!isDeleting"></fa></button>
+    </div>
+  </div>
+  <div
+    *ngIf="promoForm.form.invalid && promoForm.form.touched"
+    class="promo-editor__text-error"
+  >
+    Form contains some errors.
+  </div>
+</div>

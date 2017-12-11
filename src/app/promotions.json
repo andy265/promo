@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Old promo",
+    "startTimestamp": 1507438800,
+    "endTimestamp": 1507525200
+  },
+  {
+    "id": 2,
+    "name": "Happy new Year!",
+    "startTimestamp": 1512061200,
+    "endTimestamp": 1514739600
+  },
+  {
+    "id": 3,
+    "name": "Liter of beer for 1 dollar",
+    "startTimestamp": 1512925200,
+    "endTimestamp": 1513529940
+  },
+  {
+    "id": 4,
+    "name": "Liter of beer for 5 dollar",
+    "startTimestamp": 1513530000,
+    "endTimestamp": 1514134740
+  },
+  {
+    "id": 5,
+    "name": "Liter of beer for 99 dollar",
+    "startTimestamp": 1514134800,
+    "endTimestamp": 1514739540
+  },
+  {
+    "id": 6,
+    "name": "0.9999999 bitcoin for the price of a nine cherry",
+    "startTimestamp": 1511847900,
+    "endTimestamp": 1514175900
+  },
+  {
+    "id": 7,
+    "name": "Just another unprofitable promo action...",
+    "startTimestamp": 1503493200,
+    "endTimestamp": 1534755600
+  },
+  {
+    "id": 8,
+    "name": "Mug with a photo",
+    "startTimestamp": 1508919600,
+    "endTimestamp": 1531987680
+  }
+]

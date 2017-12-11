@@ -1,0 +1,26 @@
+@import ./assets/sass/variables
+
+body
+  background: $bg-primary
+  color: $text-primary
+  font-size: 1.2rem
+  font-family: $font-family-anonymous-pro
+a
+  color: $link-primary
+  text-decoration: none
+  border-bottom: 2px solid
+  &:hover
+    color: $link-primary-hover
+h1
+  color: #7c00ea
+  font-family: $font-family-shrikhand
+  text-shadow: 2px 4px $text-shadow
+  cursor: default
+
+.flatpickr-calendar.arrowTop:before,
+.flatpickr-calendar.arrowTop:after
+  display: none
+
+::selection
+  color: deeppink
+  background: rgba(#7c00ea, 0.996)
